@@ -10,3 +10,5 @@ const title = document.getElementById("hello");*/
 // 위의 둘의 코드는 같은 것
 
 console.log(title);
+
+title.style.color = "blue";
