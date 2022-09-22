@@ -9,6 +9,13 @@ const title = document.querySelector(".hello h1:first-child");
 const title = document.getElementById("hello");*/ 
 // 위의 둘의 코드는 같은 것
 
-console.log(title);
+// console.log(title);
 
-title.style.color = "blue";
+// title.style.color = "blue";
+
+function handleTitleClick(){
+    // console.log("title was clicked!");
+    title.style.color = "blue";
+}
+
+title.addEventListener("click", handleTitleClick);
