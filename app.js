@@ -30,9 +30,13 @@ function handleWindowResize(){
     document.body.style.backgroundColor = "tomoto";
 }
 
+function handleWindowCopy(){
+    alert("copyer!");
+}
+
 h1.addEventListener("click", handleTitleClick);
 h1.addEventListener("mouseEnter", handleMouseEnter);
 h1.addEventListener("mouseleave", handleMouseLeave);
 
-
 window.addEventListener("resize", handleWindowResize);
+window.addEventListener("copy", handleWindowCopy);
