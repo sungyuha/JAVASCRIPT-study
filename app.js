@@ -29,3 +29,6 @@ function handleMouseLeave(){
 title.addEventListener("click", handleTitleClick);
 title.addEventListener("mouseEnter", handleMouseEnter);
 title.addEventListener("mouseleave", handleMouseLeave);
+
+
+window.addEventListener("resize", handleWindowResize);
