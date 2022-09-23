@@ -8,7 +8,7 @@ function handleTitleClick(){
     const currentColor = h1.style.color;
     let newColor;
     if(currentColor === "blue"){
-        newColor = "tomoto";
+        newColor = "tomato";
     } else {
         newColor = "blue";
     }
