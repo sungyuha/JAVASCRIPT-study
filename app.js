@@ -2,7 +2,7 @@
 // 똑같은 클래스 사용할때 전체 가지고 오고 싶으면 꼭 querySelectorAll -> 배열의 형태로 출력 됨
 // 아니면 querySelector 만 사용시 첫 번째만 가지고 옴
 
-const title = document.querySelector("div.hello:first-child h1");
+const h1 = document.querySelector("div.hello:first-child h1");
 // 조건에 맞는 첫 번째를 요소를 가져옴
 
 /*ㅜconst title = document.querySelector("#hello");
@@ -15,20 +15,24 @@ const title = document.getElementById("hello");*/
 
 function handleTitleClick(){
     // console.log("title was clicked!");
-    title.style.color = "blue";
+    h1.style.color = "blue";
 }
 
 function handleMouseEnter(){
-    tilte.innerText = "mouse is here!";
+    h1.innerText = "mouse is here!";
 }
 
 function handleMouseLeave(){
-    title.innerText = "Mouse is gone";
+    h1.innerText = "Mouse is gone";
 }
 
-title.addEventListener("click", handleTitleClick);
-title.addEventListener("mouseEnter", handleMouseEnter);
-title.addEventListener("mouseleave", handleMouseLeave);
+function handleWindowResize(){
+    document.body.style.backgroundColor = "tomoto";
+}
+
+h1.addEventListener("click", handleTitleClick);
+h1.addEventListener("mouseEnter", handleMouseEnter);
+h1.addEventListener("mouseleave", handleMouseLeave);
 
 
 window.addEventListener("resize", handleWindowResize);
