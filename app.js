@@ -6,10 +6,12 @@ const h1 = document.querySelector("div.hello:first-child h1");
 
 function handleTitleClick(){
     const clickedClass = "clicked";
-    if(h1.className === "clickedClass"){ // === 면 className이 h1과 같은지
-        h1.className = ""; // = 면  해당 되는 값을 className 값으로 변경
+    if(h1.classList.contains(clickedClass)){ 
+        h1.className = ""; 
+        // = 면  해당 되는 값을 className 값으로 변경
     } else {
-        h1.className = "clickedClass"; // string을 두 번 사용하면 에레 발생할 확률이 높아짐
+        h1.className = "clickedClass";
+        // string을 두 번 사용하면 에레 발생할 확률이 높아짐
     }
 }
 
