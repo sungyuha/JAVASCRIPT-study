@@ -1,2 +1,1 @@
-# JAVASCRIPT-study
- JAVASCRIPT
+# JAVASCRIPT 개인공부
