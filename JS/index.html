@@ -7,9 +7,26 @@
     <title>Document</title>
     <!-- <script defer src="operator.js"></script> -->
     <!-- <script defer src="2.function.js"></script> -->
-    <script defer src="18.Generator.js"></script>
+    <script defer src="Dom&event.js"></script>
 </head>
 <body>
-    
+    <button onclick="alert('click')">클릭1</button>
+    <button onclick="alert('sayHello()')">클릭2</button>
+    <button id="btn">클릭3</button>
+    <button id="btn2">클릭4</button>
+    <script>
+        function sayHello() {
+            alert("Hello");
+        }
+
+        const el = document.getElementById("btn");
+        el.onclick = sayHello;
+
+        const el2 = document.getElementById("btn2");
+        // el2.addEventListener("click", sayHello); // 클릭을 줘서 전달하고 핸들러를 실행 
+        el.addEventListener("click", () => {
+            alert("h1");
+        }); // 함수를 전달하지 않고 직접 작성하는 것도 가능
+    </script>
 </body>
 </html>
