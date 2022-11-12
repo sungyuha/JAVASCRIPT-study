@@ -27,6 +27,18 @@
         el.addEventListener("click", () => {
             alert("h1");
         }); // 함수를 전달하지 않고 직접 작성하는 것도 가능
+
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     document.body.style.backgroundColor = 'green'; // DOMContentLoaded 이벤트가 발생하면 배경색을 그린색으로 변경
+        // });
+
+        // document.onaddEventListener('DOMContentLoaded' = () => {
+        //     document.body.style.backgroundColor = 'green'; // 동작하지 않음 -> 가급적이면 addEventListener로 통일하는게 좋음
+        // });
+
+        document.removeEventListener('DOMContentLoaded' = () => {
+            document.body.style.backgroundColor = 'green'; // 동작하지 않음 -> 가급적이면 addEventListener로 통일하는게 좋음
+        });
     </script>
 </body>
 </html>
