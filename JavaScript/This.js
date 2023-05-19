@@ -5,7 +5,7 @@
 
 // ** this는 함수를 호출한 객체이다 
 
-// 전역 객체 일 때 this
+// 1. 전역 객체 일 때 this
 console.log(this); 
 
 // 윈도우 값이 나옴. window객체는 브러우저 정보값을 가지고 있는 전역객체
@@ -29,3 +29,41 @@ function main() {
 
 main(); // == window.main() 호출하는 것과 동일
 // main 함수는 window 객체에 등록 된 함수이기 때문!!
+
+/* 
+한가지 예외사항! 
+최 상단에 'use strict'를 써서 엄격 모드를 활성화 시키면
+main으로 함수를 호출하면 this값이 undefined 
+this값은 window로 가지고 싶으면 window.main으로 
+*/
+
+// 2. 객체의 메소드
+
+const object = {
+    name: "별코딩",
+    main: function () {
+        // 메소드는 객체의 속성으로 쏙 넣어진 함수를 의미
+        /* this는 object를 가리키고 있기 매문에 name에 접근 가능
+        console.log(this.main);이 됨 */
+        console.log(this);
+    },
+};
+
+// object 객체의 메소드로서 main함수 호출
+// 그래서 this는 object가 됨
+// 객체에 다른 속성을 접근할 때 굉장히 유용함
+object.main();
+
+// 객체 밖에 
+function main2 () {
+    console.log(this);
+}
+
+const object2 = {
+    name: "별코딩",
+    // 객체의 구성원으로 포함시켜줘도 동일하게 this는 object2 객체를 포함 시킴
+    main2,
+};
+
+// 객체 밖이나 안이나 object2를 메인으로 호출하면 this는 object2를 가리킴
+object2.main2();
