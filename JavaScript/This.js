@@ -67,3 +67,16 @@ const object2 = {
 
 // 객체 밖이나 안이나 object2를 메인으로 호출하면 this는 object2를 가리킴
 object2.main2();
+
+// 3. Bind : 새로운 함수를 반환
+
+function main3() {
+    // this값은 bind 안에 넣어둔 인자 값이 출력 됨
+    console.log(this);
+}
+
+// 함수 뒤에 bind를 할당
+// bind의 인자로 원하는 객체를 할당
+const mainBind = main3.bind({name: "Hello"}); // bind는 새로운 함수를 반환
+mainBind();
+// bind의 주의점!! bind를 또 할 수 없음
