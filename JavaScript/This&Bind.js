@@ -80,3 +80,27 @@ function main3() {
 const mainBind = main3.bind({name: "Hello"}); // bind는 새로운 함수를 반환
 mainBind();
 // bind의 주의점!! bind를 또 할 수 없음
+
+// 한 번 binding을 해준 건 그냥 무시해버림
+const mainBindBind = mainBind.bind({});
+
+// 또 다른 예제
+
+const object3 = {
+    name: '별코딩',
+    main: function() {
+        console.log(this);
+        // 우리가 원하는 값으로 나오게 하고 싶으면 함수를 바인딩 시켜주면 됨
+    }.bind({name: '멋진 객체'}),
+};
+
+object3.main();
+
+// 이벤트 처리기(=== 함수를 돔 요소에 이벤트 처리할 때 this 값)
+const button = document.getElementById('btn');
+
+button.addEventListener("click", function() {
+    // this 값으로 버튼의 요소가 출력 됨
+    // 이벤트를 발생시신 요소로 this 값이 설정 됨
+    console.log(this);
+});
