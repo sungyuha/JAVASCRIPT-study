@@ -91,3 +91,18 @@ print("hi")
 const print2 = () => console.log(text)
 
 print2("hi")
+
+// 예제4 화살표 함수
+const getOject = () => {
+    // 객체 하나를 리턴
+    return {name: "별코딩"}
+}
+
+getOject()
+
+// 예제4-2 간결한 화살표 함수
+const getOject2 = () => ({name: "별코딩"})
+// 문법이 혼란이 와서 하나의 객체를 리턴할 때는 소괄호로 감싸줌
+
+getOject2()
+
