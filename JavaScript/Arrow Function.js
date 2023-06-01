@@ -40,7 +40,7 @@ object2.main(); // object2
 
 // 2. 화살표 함수의 this
 // 화살표 함수는 자신만의 this를 가지고 있지 않음
-const object3 = {
+/*const object3 = {
     name: '별코딩',
     main: function () {
         console.log(this);
@@ -49,10 +49,25 @@ const object3 = {
         // window를 그대로 가져와서 this값으로 사용하개 됨
         console.log(this);
     }
-};
+};*/
 
 // window가 호출 됨
 /* 화살표 함수는 일반 함수와는 다르게 자신만의 this를 가지지 않음
 신을 감싸고 있는 스코프로 올라가서 찾게 됨. 그렇게 찾게 된 tihs를 그대로 가져와서 사용하게 됨
 */
-object3.mainArrow();
+//object3.mainArrow();
+
+const object4 = {
+    name: '별코딩',
+    // main함수를 호출하면 main함수가 실행 되먄서 
+    main: function () {
+        // 여기 있는 함수가 실행 되면서 정의해준 innerFunction도 호출 됨
+        const innerFunction = function () {
+            // this 값은 window가 됨
+            console.log(this);
+        };
+        innerFunction();
+    },
+};
+
+object4.main();
