@@ -61,10 +61,14 @@ const object4 = {
     name: '별코딩',
     // main함수를 호출하면 main함수가 실행 되먄서 
     main: function () {
-        // 여기 있는 함수가 실행 되면서 정의해준 innerFunction도 호출 됨
+        /*// 여기 있는 함수가 실행 되면서 정의해준 innerFunction도 호출 됨
         const innerFunction = function () {
-            // this 값은 window가 됨
-            console.log(this);
+            //console.log(this);// this 값은 window가 됨
+        }; */
+
+        // 화살표 함수로 작성
+        const innerFunction = () => {
+            console.log(this); // object4
         };
         innerFunction();
     },
