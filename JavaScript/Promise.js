@@ -7,11 +7,26 @@ new Promise((reselve, reject) => {
 })
  */
 
-const getDate = () => {
+/*const getDate = () => {
     // resolve, reject 중 하나는 무조건 사용해야 함
     return new Promise((res, rej) => {
         res(2);
     });
 };
 
-console.log(getDate());
+console.log(getDate());*/
+
+const getDate = () => {
+    return new Promise((res, rej) => {
+        // 에러를 반환
+        rej("error!");
+    });
+};
+
+getDate()
+    .then((res) => console.log(res))
+    .catch((error) => console.log(error));
+
+    // error!
+
+// 프로미스에서 then 방식을 자주 사용하지 않음
