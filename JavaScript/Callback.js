@@ -90,3 +90,20 @@ greetInKorea(greetInKorea);
 4. greetInKorea이 실행 될 때, name으로는 별코딩이 들어감
 5. 그래서 콘솔에 별코딩님, 안녕하세요가 출력 됨
 */
+
+/*
+콜백함수 메모
+출처 : https://inpa.tistory.com/entry/JS-%F0%9F%93%9A-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%9C%EB%B0%B1-%ED%95%A8%EC%88%98
+콜백(Callback) 함수는 간단히 말하면 매개변수로 함수 객체를 전달해서 호출 함수 내에서 매개변수 함수를 실행하는 것
+
+function sayHello(name, callback) {
+    const words = '안녕하세요 내 이름은 ' + name + ' 입니다.';
+    
+    callback(words); // 매개변수의 함수(콜백 함수) 호출
+}
+
+sayHello("인파", function printing(name) { // 함수의 이름이 없는 익명 함수
+	console.log(name); // 안녕하세요 내 이름은 인파 입니다.
+});
+
+ */
