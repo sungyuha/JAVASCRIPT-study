@@ -74,6 +74,14 @@ function update() {
     // 37(== ArrowLeft) 버튼이 눌리면
     if('ArrowLeft' in keysDown) {
         spaceshipX -= 3;
+    } // 왼쪽
+
+    // 우주선의 좌표값이 무한대로 업데이트가 되는게 아닌! 경기장 안에서만 있게 하려면
+    if(spaceshipX <=0 ) {
+        spaceshipX = 0;
+    }
+    if(spaceshipX >= canvas.width-64) {
+        spaceshipX = canvas.width - 64;
     }
 }
 
