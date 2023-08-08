@@ -19,8 +19,8 @@ document.body.appendChild(canvas);
 let backgroundImage,spaceshipImage,bulletImage,enemyImage,gameOverImage;
 
 // 우주선 좌표
-let spaceshipx = canvas.width/2-32;
-let spaceshipy = canvas.height-64;
+let spaceshipX = canvas.width/2-32;
+let spaceshipY = canvas.height-64;
 
 function loadImage() {
     // 게임 캔버스 배경화면
@@ -44,23 +44,49 @@ function loadImage() {
     gameOverImage.src="images/gameover.png";
 }
 
+// 어떤 버튼이 눌렸는지 keysDown 변수에 저장
+let keysDown={}
 // 방향키를 누르면
 function setupKeyboardListener() {
     // 이벤트 읽어오는 함수
     document.addEventListener("keydown", function(event){ // 매개변수 event 들어옴
         // keydown이벤트가 발생하면 호출
-        console.log("무슨 키가 눌렸어?", event.key);
-    })
+        keysDown[event.key] = true;
+        console.log("키다운객체에 들어간 값은?", keysDown);
+    });
+    // 방향키를 누르고나면(버튼 클릭 후)
+    document.addEventListener("keyup", function(event) {
+        // 버튼 클릭 후 keysDown 값 삭제
+        delete keysDown[event.key]
+        console.log("버튼 클릭후",keysDown);
+    });
 }
+
+// 우주선의 xy 좌표가 바뀌고
+function update() {
+    //우주선이 오른쪽으로 간다 : x좌표의 값이 증가한다
+    // 39(== ArrowRight) 버튼이 눌리면
+    if('ArrowRight' in keysDown) {
+        spaceshipX += 3; // 우주선의 속도
+    } // 오른쪽
+
+    // 우주선이 왼쪽으로 간다 : x좌표의 값이 감소한다
+    // 37(== ArrowLeft) 버튼이 눌리면
+    if('ArrowLeft' in keysDown) {
+        spaceshipX -= 3;
+    }
+}
+
 
 // 이미지 보여주는 함수
 // render는 ui를 그려주는 걸 표헌함
 function render() {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-    ctx.drawImage(spaceshipImage, spaceshipx, spaceshipy);
+    ctx.drawImage(spaceshipImage, spaceshipX, spaceshipY);
 }
 
 function main() {
+    update(); // 좌표값을 업데이트하고
     // 이미지 호출
     render()
     // console.log("Animation call Frame function");
@@ -73,6 +99,4 @@ loadImage();
 setupKeyboardListener();
 main();
 
-// 방향키를 누르면
-// 우주선의 xy 좌표가 바뀌고
 // 다시 render 그려준다
