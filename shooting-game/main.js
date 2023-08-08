@@ -44,6 +44,15 @@ function loadImage() {
     gameOverImage.src="images/gameover.png";
 }
 
+// 방향키를 누르면
+function setupKeyboardListener() {
+    // 이벤트 읽어오는 함수
+    document.addEventListener("keydown", function(event){ // 매개변수 event 들어옴
+        // keydown이벤트가 발생하면 호출
+        console.log("무슨 키가 눌렸어?", event.key);
+    })
+}
+
 // 이미지 보여주는 함수
 // render는 ui를 그려주는 걸 표헌함
 function render() {
@@ -61,4 +70,9 @@ function main() {
 
 // 함수 호출
 loadImage();
+setupKeyboardListener();
 main();
+
+// 방향키를 누르면
+// 우주선의 xy 좌표가 바뀌고
+// 다시 render 그려준다
