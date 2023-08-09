@@ -22,6 +22,28 @@ let backgroundImage,spaceshipImage,bulletImage,enemyImage,gameOverImage;
 let spaceshipX = canvas.width/2-32;
 let spaceshipY = canvas.height-64;
 
+// 발사 된 총알 아이템들을 배열에 저장
+let bulletList = []; // 총알 아이템들을 저장하는 리스트
+
+// 총알 아이템 좌표
+function Bullet() {
+    this.x = 0; // x는 Bullet의 함수에 속함. x값 정의
+    this.y = 0; // y는 Bullet의 함수에 속함 y값 정의
+    // 초기화시키는 함수
+    this.init = function(){
+        // 총알 아이템 발사는 우주선에서 시작
+        this.x = spaceshipX + 7;
+        this.y = spaceshipY;
+        // x,y,init 값 저장
+        bulletList.push(this);
+    };
+
+    // 총알 아이템 발사 (업데이트 함수)
+    this.update = function() {
+        this.y -= 7;
+    }
+}
+
 function loadImage() {
     // 게임 캔버스 배경화면
     backgroundImage = new Image();
@@ -31,7 +53,7 @@ function loadImage() {
     spaceshipImage = new Image();
     spaceshipImage.src="images/spaceship.png";
 
-    // 게임 총알
+    // 게임 총알 아이템
     bulletImage = new Image();
     bulletImage.src="images/bullet.png";
 
@@ -60,16 +82,20 @@ function setupKeyboardListener() {
         delete keysDown[event.key]
         //console.log("버튼 클릭후",keysDown);
 
-        // 만약에 키를 값이 눌리면 아이템인 총알 발사
+        // 만약에 키를 값이 눌리면 아이템인 총알 아이템 발사
         if(event.key == " ") {
-            createBullet() // 총알 생성 함수
+            createBullet() // 총알 아이템 생성 함수
         }
     });
 }
 
-// 총알을 발사해주는 함수
+// 총알 아이템을 발사해주는 함수
 function createBullet() {
-    console.log("총알 생성!");
+    console.log("총알 아이템생성!");
+    let b = new Bullet() // 총알 아이템 생성
+    // 총알 아이템들을 배열에 저장하고 호출
+    b.init();
+    console.log("새로운 총알아이템 리스트!", bulletList);
 }
 
 // 우주선의 xy 좌표가 바뀌고
@@ -93,6 +119,11 @@ function update() {
     if(spaceshipX >= canvas.width-64) {
         spaceshipX = canvas.width - 64;
     }
+
+    // 총알 아이템의 y좌표 업데이트 함수 호출
+    for(let i = 0; i < bulletList.length; i++) {
+        bulletList[i].update()
+    }
 }
 
 // 이미지 보여주는 함수
@@ -100,6 +131,12 @@ function update() {
 function render() {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     ctx.drawImage(spaceshipImage, spaceshipX, spaceshipY);
+
+    // 총알 아이템 UI로 그려주기
+    for(let i = 0; i < bulletList.length; i++) { // 총알 아이템리스트 만큼 증가
+        // 총알 아이템을 그려줄건데 bulletList i번째에 있는 x값과 bulletList i번째에 있는 y값
+        ctx.drawImage(bulletImage, bulletList[i].x, bulletList[i].y)
+    }
 }
 
 function main() {
@@ -119,10 +156,10 @@ main();
 // 다시 render 그려준다
 
 /* 
-총알 만들기
-1) 스페이스바를 누르면 총알 발사
-2) 총알이 발사 == 총알의 y값이 -- , 총알의 x 값은? 스페이스를 누른 순간의 우주선의 x좌표
-3) 발사 된 총알들은 총알 배열에 저장한다
-4) 모든 총알들은 x,y 좌표값이 있어야 한다
-5) 총알 배열을 가지고 render 그려준다
+총알 아이템 만들기
+1) 스페이스바를 누르면 총알 아이템 발사
+2) 총알 아이템 발사 == 총알 아이템 y값이 -- , 총알 아이템의 x 값은? 스페이스를 누른 순간의 우주선의 x좌표
+3) 발사 된 총알 아이템들은 배열에 저장한다
+4) 모든 총알 아이템들은 x,y 좌표값이 있어야 한다
+5) 총알 아이템은 배열을 가지고 render 그려준다
 */
