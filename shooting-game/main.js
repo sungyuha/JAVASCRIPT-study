@@ -52,14 +52,24 @@ function setupKeyboardListener() {
     document.addEventListener("keydown", function(event){ // 매개변수 event 들어옴
         // keydown이벤트가 발생하면 호출
         keysDown[event.key] = true;
-        console.log("키다운객체에 들어간 값은?", keysDown);
+        //console.log("키다운객체에 들어간 값은?", keysDown);
     });
     // 방향키를 누르고나면(버튼 클릭 후)
     document.addEventListener("keyup", function(event) {
         // 버튼 클릭 후 keysDown 값 삭제
         delete keysDown[event.key]
-        console.log("버튼 클릭후",keysDown);
+        //console.log("버튼 클릭후",keysDown);
+
+        // 만약에 키를 값이 눌리면 아이템인 총알 발사
+        if(event.key == " ") {
+            createBullet() // 총알 생성 함수
+        }
     });
+}
+
+// 총알을 발사해주는 함수
+function createBullet() {
+    console.log("총알 생성!");
 }
 
 // 우주선의 xy 좌표가 바뀌고
@@ -85,7 +95,6 @@ function update() {
     }
 }
 
-
 // 이미지 보여주는 함수
 // render는 ui를 그려주는 걸 표헌함
 function render() {
@@ -108,3 +117,12 @@ setupKeyboardListener();
 main();
 
 // 다시 render 그려준다
+
+/* 
+총알 만들기
+1) 스페이스바를 누르면 총알 발사
+2) 총알이 발사 == 총알의 y값이 -- , 총알의 x 값은? 스페이스를 누른 순간의 우주선의 x좌표
+3) 발사 된 총알들은 총알 배열에 저장한다
+4) 모든 총알들은 x,y 좌표값이 있어야 한다
+5) 총알 배열을 가지고 render 그려준다
+*/
