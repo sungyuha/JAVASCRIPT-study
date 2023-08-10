@@ -5,8 +5,8 @@ let canvas;
 let ctx;
 
 // 캔버스 
-canvas = document.createElement("canvas")
-ctx = canvas.getContext("2d")
+canvas = document.createElement("canvas");
+ctx = canvas.getContext("2d");
 
 // 캔버스 사이즈
 canvas.width=400;
@@ -41,7 +41,34 @@ function Bullet() {
     // 총알 아이템 발사 (업데이트 함수)
     this.update = function() {
         this.y -= 7;
-    }
+    };
+}
+
+// 랜덤하게 떨어지게
+function generateRandomValue(min, max) { // 최소값, 최대값
+    // Math.random : 0 ~ 1 사이 숫자 랜덤하게 반환
+    // Math.floor : 내림 함수
+    let randomNum = Math.floor(Math.random()*(max - min + 1)) + min;
+    return randomNum;
+}
+
+// 게임 적군을 일정하게 떨어주게 만드는 값을 배열에 저장
+let enemyList = []
+
+// 게임 적군 만들기
+function Enemy() {
+    this.x = 0;
+    this.y = 0;
+    this.init = function() {
+        this.y = 0;
+        // 랜덤하게 지정. 랜덤하게 떨어지게 함수 생성
+        this.x = generateRandomValue(0, canvas.width - 48);
+        enemyList.push(this);
+    };
+    // 게임 적군의 좌표 증가 업데이트 시켜주는 함수
+    this.update = function() {
+        this.y += 3; // 게임 적군 속도 조절
+    };
 }
 
 function loadImage() {
@@ -79,7 +106,7 @@ function setupKeyboardListener() {
     // 방향키를 누르고나면(버튼 클릭 후)
     document.addEventListener("keyup", function(event) {
         // 버튼 클릭 후 keysDown 값 삭제
-        delete keysDown[event.key]
+        delete keysDown[event.key];
         //console.log("버튼 클릭후",keysDown);
 
         // 만약에 키를 값이 눌리면 아이템인 총알 아이템 발사
@@ -91,11 +118,23 @@ function setupKeyboardListener() {
 
 // 총알 아이템을 발사해주는 함수
 function createBullet() {
-    console.log("총알 아이템생성!");
+    //console.log("총알 아이템생성!");
     let b = new Bullet() // 총알 아이템 생성
     // 총알 아이템들을 배열에 저장하고 호출
     b.init();
-    console.log("새로운 총알아이템 리스트!", bulletList);
+    //console.log("새로운 총알아이템 리스트!", bulletList);
+}
+
+// 게임 적군은 1초마다 하나씩 나오는 적군 생성 함수
+function createEnemy() {
+    // 2개의 매개변수가 들어감
+    // 첫 번째 매개변수 : 호출하고 싶은 함수, 두번째 매개변수 : 시간
+    const interval = setInterval(function() {
+        // 게임 적군 생성
+        let e = new Enemy();
+        // e를 초기화 함수
+        e.init();
+    }, 1000); // 1초마다
 }
 
 // 우주선의 xy 좌표가 바뀌고
@@ -122,7 +161,12 @@ function update() {
 
     // 총알 아이템의 y좌표 업데이트 함수 호출
     for(let i = 0; i < bulletList.length; i++) {
-        bulletList[i].update()
+        bulletList[i].update();
+    }
+
+    // 게임 적군 y좌표 증가 업데이트 함수 호출
+    for(let i = 0; i < enemyList.length; i++) {
+        enemyList[i].update();
     }
 }
 
@@ -135,22 +179,28 @@ function render() {
     // 총알 아이템 UI로 그려주기
     for(let i = 0; i < bulletList.length; i++) { // 총알 아이템리스트 만큼 증가
         // 총알 아이템을 그려줄건데 bulletList i번째에 있는 x값과 bulletList i번째에 있는 y값
-        ctx.drawImage(bulletImage, bulletList[i].x, bulletList[i].y)
+        ctx.drawImage(bulletImage, bulletList[i].x, bulletList[i].y);
+    }
+
+    // 게임 적군 UI로 그려주기! 위에 총알 아이템 그려주는거와 동일
+    for(let i = 0; i < enemyList.length; i++) {
+        ctx.drawImage(enemyImage, enemyList[i].x, enemyList[i].y);
     }
 }
 
 function main() {
     update(); // 좌표값을 업데이트하고
     // 이미지 호출
-    render()
+    render();
     // console.log("Animation call Frame function");
     // 애니메이션처럼 프레임을 여러번 호출
-    requestAnimationFrame(main)
+    requestAnimationFrame(main);
 }
 
 // 함수 호출
 loadImage();
 setupKeyboardListener();
+createEnemy();
 main();
 
 // 다시 render 그려준다
