@@ -18,6 +18,9 @@ document.body.appendChild(canvas);
 // 이미지 가져오기
 let backgroundImage,spaceshipImage,bulletImage,enemyImage,gameOverImage;
 
+// 게임의 상태값 : 게임 오버 관련
+let gameOver = false; // true이면 게임 종료. false이면 게임 진행
+
 // 우주선 좌표
 let spaceshipX = canvas.width/2-32;
 let spaceshipY = canvas.height-64;
@@ -67,7 +70,12 @@ function Enemy() {
     };
     // 게임 적군의 좌표 증가 업데이트 시켜주는 함수
     this.update = function() {
-        this.y += 3; // 게임 적군 속도 조절
+        this.y += 2; // 게임 적군 속도 조절
+
+        if(this.y >= canvas.height -48) { // this y의 값이 더 커지면 캔버스의 높이에 우주선의 높이 -48
+            gameOver = true; // gameOver가 true로 반환
+            console.log("게임오버!");
+        }
     };
 }
 
@@ -189,12 +197,15 @@ function render() {
 }
 
 function main() {
-    update(); // 좌표값을 업데이트하고
-    // 이미지 호출
-    render();
-    // console.log("Animation call Frame function");
-    // 애니메이션처럼 프레임을 여러번 호출
-    requestAnimationFrame(main);
+    // 게임 오버가 되면
+    if(!gameOver) {
+        update(); // 좌표값을 업데이트하고
+        // 이미지 호출
+        render();
+        // console.log("Animation call Frame function");
+        // 애니메이션처럼 프레임을 여러번 호출
+        requestAnimationFrame(main);
+    }
 }
 
 // 함수 호출
