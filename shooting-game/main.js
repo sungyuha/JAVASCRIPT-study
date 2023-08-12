@@ -205,6 +205,9 @@ function main() {
         // console.log("Animation call Frame function");
         // 애니메이션처럼 프레임을 여러번 호출
         requestAnimationFrame(main);
+    } else {
+        // 게임 오버가 되면
+        ctx.drawImage(gameOverImage, 10, 100, 380, 240);
     }
 }
 
