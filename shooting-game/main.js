@@ -9,8 +9,8 @@ canvas = document.createElement("canvas");
 ctx = canvas.getContext("2d");
 
 // 캔버스 사이즈
-canvas.width=400;
-canvas.height=700;
+canvas.width = 400;
+canvas.height = 700;
 
 // HTML에 붙여줌
 document.body.appendChild(canvas);
@@ -20,6 +20,9 @@ let backgroundImage,spaceshipImage,bulletImage,enemyImage,gameOverImage;
 
 // 게임의 상태값 : 게임 오버 관련
 let gameOver = false; // true이면 게임 종료. false이면 게임 진행
+
+// 점수 스코어
+let score = 0;
 
 // 우주선 좌표
 let spaceshipX = canvas.width/2-32;
@@ -37,6 +40,9 @@ function Bullet() {
         // 총알 아이템 발사는 우주선에서 시작
         this.x = spaceshipX + 7;
         this.y = spaceshipY;
+
+        // 총알 아이템의 상태
+        this.alive = true; // true면 사용가능한 아이템, false면 이미 쓰여진 아이템
         // x,y,init 값 저장
         bulletList.push(this);
     };
@@ -45,6 +51,24 @@ function Bullet() {
     this.update = function() {
         this.y -= 7;
     };
+
+    // 총알 아이템 체크
+    this.checkHit = function() {
+        console.log(enemyList);
+        for(let i = 0; enemyList.length; i++) {
+            // 만약에 y값이 더 게임 적군의 y값 보다 작아진다면
+            // 그리고 총알 아이템의 x 값이 각각 게임 적군의 x 값보다 큰지
+            // 그리고 this x값이 게임 적군의 각 x값의 게임 적군의 넓이를 더한것보다 큰지
+            if(this.y <= enemyList[i].y && this.x >= enemyList[i].x && this.x <= enemyList[i].x + 40)  {
+                // 총알 아이템이 사라지고, 게임 적군이 없어짐, 점수 획득
+                score++;
+                // 이미 쓰여진 총알 아이템
+                this.alive = false;
+                // 총알 아이템이 닿은 게임 적군만 splice(==잘라지게) 즉, 사라지게 만듬
+                enemyList.splice(i,1);
+            }
+        }
+    }
 }
 
 // 랜덤하게 떨어지게
@@ -102,7 +126,7 @@ function loadImage() {
 }
 
 // 어떤 버튼이 눌렸는지 keysDown 변수에 저장
-let keysDown={}
+let keysDown = {}
 // 방향키를 누르면
 function setupKeyboardListener() {
     // 이벤트 읽어오는 함수
@@ -170,6 +194,8 @@ function update() {
     // 총알 아이템의 y좌표 업데이트 함수 호출
     for(let i = 0; i < bulletList.length; i++) {
         bulletList[i].update();
+        // 총알 아이템의 y값을 확인하면서 y 값의 총알 아이템이 게임 적군에 닿았는지 체크
+        bulletList[i].checkHit();
     }
 
     // 게임 적군 y좌표 증가 업데이트 함수 호출
@@ -186,8 +212,11 @@ function render() {
 
     // 총알 아이템 UI로 그려주기
     for(let i = 0; i < bulletList.length; i++) { // 총알 아이템리스트 만큼 증가
-        // 총알 아이템을 그려줄건데 bulletList i번째에 있는 x값과 bulletList i번째에 있는 y값
-        ctx.drawImage(bulletImage, bulletList[i].x, bulletList[i].y);
+        // bulletList에 i번째에 있는 아이템에 총알 아이템이 사용가능하면 
+        if(bulletList[i].alive) {
+            // 총알 아이템을 그려줄건데 bulletList i번째에 있는 x값과 bulletList i번째에 있는 y값
+            ctx.drawImage(bulletImage, bulletList[i].x, bulletList[i].y);
+        }
     }
 
     // 게임 적군 UI로 그려주기! 위에 총알 아이템 그려주는거와 동일
@@ -236,4 +265,12 @@ main();
 4) 게임 적군은 1초마다 하나씩 나온다
 5) 게임 적군의 우주선이 바닥에 닿으면 게임 오버
 6) 게임 적군과 총알 아이템이 만나면 우주선이 사라지며, 점수 1점 획득
+*/
+
+/*
+1) 게임 적군이 사라진다
+2) 총알 아이템.y <= 게임 적군.y And
+총일 아이템.x >= 게임 적군.x and 총알 아이템.x <= 적군.x + 게임 적군의 넓이
+-> 닿았다고 표현
+3) 총알 아이템이 사라지고 게임 적군이 없어짐. 점수 획득
 */
