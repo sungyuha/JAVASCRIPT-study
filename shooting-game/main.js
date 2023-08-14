@@ -209,6 +209,9 @@ function update() {
 function render() {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     ctx.drawImage(spaceshipImage, spaceshipX, spaceshipY);
+    ctx.fillText(`Score:${score}`, 20, 20);
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
 
     // 총알 아이템 UI로 그려주기
     for(let i = 0; i < bulletList.length; i++) { // 총알 아이템리스트 만큼 증가
