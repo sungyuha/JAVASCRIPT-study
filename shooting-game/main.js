@@ -54,7 +54,7 @@ function Bullet() {
 
     // 총알 아이템 체크
     this.checkHit = function() {
-        console.log(enemyList);
+        console.log("오류 찾는중", enemyList);
         for(let i = 0; enemyList.length; i++) {
             // 만약에 y값이 더 게임 적군의 y값 보다 작아진다면
             // 그리고 총알 아이템의 x 값이 각각 게임 적군의 x 값보다 큰지
