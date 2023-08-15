@@ -80,7 +80,7 @@ function generateRandomValue(min, max) { // 최소값, 최대값
 }
 
 // 게임 적군을 일정하게 떨어주게 만드는 값을 배열에 저장
-let enemyList = []
+let enemyList = [];
 
 // 게임 적군 만들기
 function Enemy() {
@@ -90,13 +90,14 @@ function Enemy() {
         this.y = 0;
         // 랜덤하게 지정. 랜덤하게 떨어지게 함수 생성
         this.x = generateRandomValue(0, canvas.width - 48);
+        // 방금 만든 적군을 더함
         enemyList.push(this);
     };
     // 게임 적군의 좌표 증가 업데이트 시켜주는 함수
     this.update = function() {
         this.y += 2; // 게임 적군 속도 조절
 
-        if(this.y >= canvas.height -48) { // this y의 값이 더 커지면 캔버스의 높이에 우주선의 높이 -48
+        if(this.y >= canvas.height - 48) { // this y의 값이 더 커지면 캔버스의 높이에 우주선의 높이 -48
             gameOver = true; // gameOver가 true로 반환
             console.log("게임오버!");
         }
