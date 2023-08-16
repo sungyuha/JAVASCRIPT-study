@@ -54,8 +54,8 @@ function Bullet() {
 
     // 총알 아이템 체크
     this.checkHit = function() {
-        console.log("오류 찾는중", enemyList);
-        for(let i = 0; enemyList.length; i++) {
+        //console.log("오류 찾는중", enemyList);
+        for(let i = 0; i < enemyList.length; i++) {
             // 만약에 y값이 더 게임 적군의 y값 보다 작아진다면
             // 그리고 총알 아이템의 x 값이 각각 게임 적군의 x 값보다 큰지
             // 그리고 this x값이 게임 적군의 각 x값의 게임 적군의 넓이를 더한것보다 큰지
@@ -89,7 +89,7 @@ function Enemy() {
     this.init = function() {
         this.y = 0;
         // 랜덤하게 지정. 랜덤하게 떨어지게 함수 생성
-        this.x = generateRandomValue(0, canvas.width - 48);
+        this.x = generateRandomValue(0, canvas.width - 24);
         // 방금 만든 적군을 더함
         enemyList.push(this);
     };
@@ -99,7 +99,7 @@ function Enemy() {
 
         if(this.y >= canvas.height - 48) { // this y의 값이 더 커지면 캔버스의 높이에 우주선의 높이 -48
             gameOver = true; // gameOver가 true로 반환
-            console.log("게임오버!");
+            //console.log("게임오버!");
         }
     };
 }
@@ -127,7 +127,7 @@ function loadImage() {
 }
 
 // 어떤 버튼이 눌렸는지 keysDown 변수에 저장
-let keysDown = {}
+let keysDown = {};
 // 방향키를 누르면
 function setupKeyboardListener() {
     // 이벤트 읽어오는 함수
