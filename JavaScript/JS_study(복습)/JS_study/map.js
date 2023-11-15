@@ -11,6 +11,15 @@ const log = console.log;
  * 맵 내부에서 콜백함수들이 실행됨 -> 맵핑 function이라고 함
  */
 
+/**
+ * 내장된 생성자 중 iterable 객체를 만들어내는 생성자! 
+ * String
+ * Array
+ * TypedArray
+ * Map
+ * Set
+*/
+// 반복 가능한 객체(iterable object) 혹은 줄여서 iterable이라고 부름
 iterable.map((item) => {
     // 맵 내부에서 콜백함수들이 실행됨, 이 것을 맵핑 function이라고 함
     // 맵핑 function을 배열의 원소마다 하나씩 적용 시켜줌
