@@ -24,3 +24,20 @@ iterable.map((item) => {
     // 맵 내부에서 콜백함수들이 실행됨, 이 것을 맵핑 function이라고 함
     // 맵핑 function을 배열의 원소마다 하나씩 적용 시켜줌
 });
+
+// 예제1
+const arr = [15, 30, 100];
+
+const mapped = arr.map((value) => { // 변수에 map핑
+    // toFixed() 메서드는 숫자를 고정 소수점 표기법(fixed-point notation)으로 표시
+    // 반환 값 : 고정 소수점 표기법을 사용하여 나타낸 수를 문자열로 바꾼 값
+    return value.toFixed((2));
+});
+
+log(mapped);
+/**
+ * map을 사용할때 장점!!
+ * 1. 가독성 -> for loop, while loop 사용 X
+ * 2. index를 통해서 원형배열에 접근 할 필요가 없음 -> arr[1], arr[0] X
+ * 3. 원형배열 수정 X
+ */
