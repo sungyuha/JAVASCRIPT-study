@@ -26,7 +26,7 @@ iterable.map((item) => {
 });
 
 // 예제1
-const arr = [15, 30, 100];
+/* const arr = [15, 30, 100];
 
 const mapped = arr.map((value) => { // 변수에 map핑
     // toFixed() 메서드는 숫자를 고정 소수점 표기법(fixed-point notation)으로 표시
@@ -34,10 +34,39 @@ const mapped = arr.map((value) => { // 변수에 map핑
     return value.toFixed((2));
 });
 
-log(mapped);
+log(mapped); */
 /**
  * map을 사용할때 장점!!
  * 1. 가독성 -> for loop, while loop 사용 X
  * 2. index를 통해서 원형배열에 접근 할 필요가 없음 -> arr[1], arr[0] X
  * 3. 원형배열 수정 X
  */
+
+// 예제2
+const location = [
+    // location 배열을 만들어주고 그 안에 객체들이 있음
+    // 그 객체에는 city라는 프로퍼티와 temp라는 프로퍼티
+    //  ㄴ 프토퍼티(property): 일부 객체 지향 프로그래밍 언어에서 필드(데이터 멤버)와 메소드 간 기능의 중간인 클래스 멤버의 특수한 유형
+    { city: "seoul", temp: "86" }, // 화씨 온도
+    { city: "london", temp: "85" },
+    { city: "toronto", temp: "72" },
+];
+
+// 화씨에서 섭씨로 변환시켜주는 작업
+// 5/9 * ( f -32 ) 왼쪽과 같은 포뮬라
+
+const toCelcius = ogj => {
+    return {
+        // 스프레드 사용, 기존 값은 그대로 사용하기에
+        ...ogj,
+        // 변환 되는 함수 값
+        temp: Math.floor(5/9 * (ogj.temp -32))
+    }
+};
+
+// 최종적
+// location으로 map을 돌려줌
+const mapped = location.map(toCelcius); // 인자 값으로 toCelcius을 함수로 전달해줌
+
+// 반환 된 배열을 출력
+log(mapped);
